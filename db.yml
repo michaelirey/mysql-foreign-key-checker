@@ -1,5 +1,0 @@
-host: localhost
-post: 3306
-username: user
-password: pass
-database: db_name
