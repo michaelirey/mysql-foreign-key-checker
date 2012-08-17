@@ -17,7 +17,7 @@ class ForeignKeys
     end
     
     def get_foreign_keys_from_database
-      @foreign_keys = @client.query("SELECT `TABLE_NAME`, `COLUMN_NAME`, `REFERENCED_TABLE_NAME`, `REFERENCED_COLUMN_NAME`  FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA='bycios' AND REFERENCED_TABLE_SCHEMA IS NOT NULL;")
+      @foreign_keys = @client.query("SELECT `TABLE_NAME`, `COLUMN_NAME`, `REFERENCED_TABLE_NAME`, `REFERENCED_COLUMN_NAME`  FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA='#{config['database']}' AND REFERENCED_TABLE_SCHEMA IS NOT NULL;")
     end
 
     
