@@ -5,19 +5,19 @@ require 'yaml'
 class ForeignKeys
 
     def initialize
-      config = YAML::load(File.open(File.dirname(File.expand_path(__FILE__)) + '/db.yml'))      
+      @config = YAML::load(File.open(File.dirname(File.expand_path(__FILE__)) + '/db.yml'))      
       @client = Mysql2::Client.new(
-        :host => config['host'],
-        :port => config['port'],
-        :username => config['username'],
-        :password => config['password'],
-        :database => config['database'])
+        :host => @config['host'],
+        :port => @config['port'],
+        :username => @config['username'],
+        :password => @config['password'],
+        :database => @config['database'])
         
       get_foreign_keys_from_database
     end
     
     def get_foreign_keys_from_database
-      @foreign_keys = @client.query("SELECT `TABLE_NAME`, `COLUMN_NAME`, `REFERENCED_TABLE_NAME`, `REFERENCED_COLUMN_NAME`  FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA='#{config['database']}' AND REFERENCED_TABLE_SCHEMA IS NOT NULL;")
+      @foreign_keys = @client.query("SELECT `TABLE_NAME`, `COLUMN_NAME`, `REFERENCED_TABLE_NAME`, `REFERENCED_COLUMN_NAME`  FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA='#{@config['database']}' AND REFERENCED_TABLE_SCHEMA IS NOT NULL;")
     end
 
     
