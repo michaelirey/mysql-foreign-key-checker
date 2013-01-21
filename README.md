@@ -8,7 +8,7 @@ Checks a mysql database for foreign keys pointing to missing records.
 
 ```
    host: localhost
-   post: 3306
+   port: 3306
    username: user
    password: pass
    database: db_name
